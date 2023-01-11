@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:note_application_expert_flutter/user.dart';
 import 'home_screen.dart';
 
-void main() async{
-    await Hive.initFlutter();
-  await Hive.openBox('settings');
+void main() async {
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
+      theme: ThemeData(fontFamily: 'SM'),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
 }
-

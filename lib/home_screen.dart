@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:msh_checkbox/msh_checkbox.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,39 +9,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String input = 'empty';
-  var controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.black26,
         appBar: AppBar(
           title: Text('home Page note app'),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: controller,
-              ),
-              Text(
-                input,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    input = controller.text;
-                  });
-                },
-                child: Text('read from text field'),
-              ),
-            ],
+          child: Text(
+            'علی',
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
