@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:note_application_expert_flutter/add_task_screen.dart';
 // import 'package:note_application_expert_flutter/user.dart';
 import 'home_screen.dart';
 
@@ -14,10 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       theme: ThemeData(fontFamily: 'SM'),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: AddTaskScreen(),
     );
   }
 }
