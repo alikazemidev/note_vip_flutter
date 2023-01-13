@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:note_application_expert_flutter/task.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -12,10 +12,12 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   FocusNode negahban1 = FocusNode();
   FocusNode negahban2 = FocusNode();
+  final titleController = TextEditingController();
+  final subTitleController = TextEditingController();
+  final taskBox = Hive.box<Task>('taskBox');
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     negahban1.addListener(() {
       setState(() {});
@@ -32,11 +34,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //title textfield
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 44),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextField(
+                  controller: titleController,
                   focusNode: negahban1,
                   decoration: InputDecoration(
                     contentPadding:
@@ -67,11 +71,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             SizedBox(
               height: 40,
             ),
+            // subtitle textfield
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 44),
               child: Directionality(
                 textDirection: TextDirection.rtl,
                 child: TextField(
+                  controller: subTitleController,
                   maxLines: 2,
                   focusNode: negahban2,
                   decoration: InputDecoration(
@@ -100,13 +106,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
               ),
             ),
-           SizedBox(height: 50),
+            SizedBox(height: 50),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xff18daa3),
                 minimumSize: Size(200, 48),
               ),
-              onPressed: () {},
+              onPressed: () {
+                addTask();
+              },
               child: Text(
                 'اضافه کردن تسک',
                 style: TextStyle(
@@ -119,5 +127,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
       ),
     );
+  }
+
+  void addTask() {
+    // add task
+    taskBox.add(
+        Task(title: titleController.text, subTitle: subTitleController.text));
   }
 }
