@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'SM'),
       debugShowCheckedModeBanner: false,
-      home: AddTaskScreen(),
+      home: HomeScreen(),
     );
   }
 }

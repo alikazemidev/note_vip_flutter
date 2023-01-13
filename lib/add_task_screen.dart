@@ -130,8 +130,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   void addTask() {
-    // add task
     taskBox.add(
-        Task(title: titleController.text, subTitle: subTitleController.text));
+      Task(title: titleController.text, subTitle: subTitleController.text),
+    );
   }
 }
