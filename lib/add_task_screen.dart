@@ -78,12 +78,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 textDirection: TextDirection.rtl,
                 child: TextField(
                   controller: subTitleController,
-                  maxLines: 2,
+                  maxLines: 5,
                   focusNode: negahban2,
                   decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    labelText: 'عنوان تسک',
+                    labelText: 'توضیحات تسک',
                     labelStyle: TextStyle(
                       fontSize: 20,
                       color: negahban1.hasFocus
@@ -114,6 +114,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               onPressed: () {
                 addTask();
+                Navigator.pop(context);
               },
               child: Text(
                 'اضافه کردن تسک',

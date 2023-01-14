@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:note_application_expert_flutter/task.dart';
 
@@ -10,7 +12,13 @@ class TaskWidget extends StatefulWidget {
 }
 
 class _TaskWidgetState extends State<TaskWidget> {
-  bool ischecked = false;
+  bool isBoxChecked = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isBoxChecked = widget.task.isDone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +26,26 @@ class _TaskWidgetState extends State<TaskWidget> {
   }
 
   Widget taskItem() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      height: 132,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: taskContent(),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isBoxChecked = !isBoxChecked;
+          widget.task.isDone = isBoxChecked;
+          widget.task.save();
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        height: 132,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: taskContent(),
+        ),
       ),
     );
   }
@@ -58,19 +75,32 @@ class _TaskWidgetState extends State<TaskWidget> {
                     child: Transform.scale(
                       scale: 1.5,
                       child: Checkbox(
-                        value: ischecked,
+                        value: isBoxChecked,
                         onChanged: (value) {
-                          setState(() {
-                            ischecked = value!;
-                          });
+                          // setState(() {
+                          //   ischecked = value!;
+                          // });
                         },
                       ),
                     ),
                   ),
-                  Text(widget.task.title),
+                  Text(
+                    widget.task.title,
+                    style: TextStyle(
+                      decoration:
+                          isBoxChecked ? TextDecoration.lineThrough : null,
+                          overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ],
               ),
-              Text(widget.task.subTitle),
+              Text(
+                widget.task.subTitle,
+                style: TextStyle(
+                  decoration: isBoxChecked ? TextDecoration.lineThrough : null,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
               Spacer(),
               editAndTimeBadge(),
             ],
