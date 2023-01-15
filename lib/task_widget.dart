@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:note_application_expert_flutter/task.dart';
 
@@ -87,18 +85,18 @@ class _TaskWidgetState extends State<TaskWidget> {
                   Text(
                     widget.task.title,
                     style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
                       decoration:
                           isBoxChecked ? TextDecoration.lineThrough : null,
-                          overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
               ),
               Text(
-                widget.task.subTitle,
+                widget.task.subTitle.trim(),
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   decoration: isBoxChecked ? TextDecoration.lineThrough : null,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Spacer(),
