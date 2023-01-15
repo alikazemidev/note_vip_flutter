@@ -125,13 +125,20 @@ class _TaskWidgetState extends State<TaskWidget> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 13,
+              horizontal: 12,
               vertical: 6,
             ),
             child: Row(
               children: [
-                Text('10:30'),
-                SizedBox(width: 5),
+                Text(
+                  '${widget.task.time.hour}:${widget.task.time.minute}',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
                 Image.asset('images/icon_time.png'),
               ],
             ),
@@ -143,7 +150,9 @@ class _TaskWidgetState extends State<TaskWidget> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => EditTaskScreen(task: widget.task,),
+                builder: (context) => EditTaskScreen(
+                  task: widget.task,
+                ),
               ),
             );
           },

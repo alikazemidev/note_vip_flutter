@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:note_application_expert_flutter/task.dart';
+import 'package:time_pickerr/time_pickerr.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -15,6 +16,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final titleController = TextEditingController();
   final subTitleController = TextEditingController();
   final taskBox = Hive.box<Task>('taskBox');
+   DateTime? _time;
 
   @override
   void initState() {
@@ -106,6 +108,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
               ),
             ),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: CustomHourPicker(
+                elevation: 2,
+                title: 'زمانت رو انتخاب کن',
+                onNegativePressed: (context) {},
+                onPositivePressed: (context, time) {
+                  _time = time;
+                },
+                negativeButtonText: 'حذفش کن',
+                positiveButtonText: 'انتخابش کن',
+                positiveButtonStyle: TextStyle(
+                  color: Color(0xff18daa3),
+                ),
+                negativeButtonStyle: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ),
             SizedBox(height: 50),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -132,7 +153,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   void addTask() {
     taskBox.add(
-      Task(title: titleController.text, subTitle: subTitleController.text),
+      Task(
+          title: titleController.text,
+          subTitle: subTitleController.text,
+          time: _time!),
     );
   }
 }
+
+extension on CustomHourPicker {}

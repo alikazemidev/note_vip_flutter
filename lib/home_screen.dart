@@ -73,7 +73,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: taskBox.values.length,
                   itemBuilder: (context, index) {
                     var task = taskBox.values.toList()[index];
-                    return TaskWidget(task: task);
+                    return Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) {
+                        // if (direction == DismissDirection.endToStart) {
+                        //   print('end to start');
+                        // }
+                        // if (direction == DismissDirection.startToEnd) {
+                        //   print('start To End');
+                        // }
+                        task.delete();
+                      },
+                      child: TaskWidget(task: task),
+                    );
                   },
                 ),
               );
