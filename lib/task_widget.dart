@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_application_expert_flutter/edit_task_screen.dart';
 import 'package:note_application_expert_flutter/task.dart';
 
 class TaskWidget extends StatefulWidget {
@@ -137,30 +138,40 @@ class _TaskWidgetState extends State<TaskWidget> {
           ),
         ),
         SizedBox(width: 15),
-        Container(
-          width: 85,
-          height: 28,
-          decoration: BoxDecoration(
-            color: Color(0xffe2f1f6),
-            borderRadius: BorderRadius.circular(18),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 12,
-              vertical: 6,
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditTaskScreen(task: widget.task,),
+              ),
+            );
+          },
+          child: Container(
+            width: 85,
+            height: 28,
+            decoration: BoxDecoration(
+              color: Color(0xffe2f1f6),
+              borderRadius: BorderRadius.circular(18),
             ),
-            child: Row(
-              children: [
-                Text(
-                  'ویرایش',
-                  style: TextStyle(
-                    color: Color(0xff18daa3),
-                    fontSize: 12,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 6,
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    'ویرایش',
+                    style: TextStyle(
+                      color: Color(0xff18daa3),
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                SizedBox(width: 5),
-                Image.asset('images/icon_edit.png'),
-              ],
+                  SizedBox(width: 5),
+                  Image.asset('images/icon_edit.png'),
+                ],
+              ),
             ),
           ),
         ),
