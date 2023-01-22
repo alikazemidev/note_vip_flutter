@@ -117,7 +117,7 @@ class _TaskWidgetState extends State<TaskWidget> {
     return Row(
       children: [
         Container(
-          width: 85,
+          width: 87,
           height: 28,
           decoration: BoxDecoration(
             color: Color(0xff18daa3),
@@ -131,7 +131,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             child: Row(
               children: [
                 Text(
-                  '${widget.task.time.hour}:${widget.task.time.minute}',
+                  '${widget.task.time.hour}:${getMinutes(widget.task.time)}',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -157,7 +157,7 @@ class _TaskWidgetState extends State<TaskWidget> {
             );
           },
           child: Container(
-            width: 85,
+            width: 87,
             height: 28,
             decoration: BoxDecoration(
               color: Color(0xffe2f1f6),
@@ -186,5 +186,13 @@ class _TaskWidgetState extends State<TaskWidget> {
         ),
       ],
     );
+  }
+
+  String getMinutes(DateTime time) {
+    if (time.minute < 10) {
+      return '0${time.minute}';
+    } else {
+      return time.minute.toString();
+    }
   }
 }
