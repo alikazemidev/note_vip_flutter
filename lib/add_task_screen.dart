@@ -12,6 +12,7 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+  int _selectedIndex = 0;
   FocusNode negahban1 = FocusNode();
   FocusNode negahban2 = FocusNode();
   final titleController = TextEditingController();
@@ -130,7 +131,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                 ),
               ),
-              TaskTypeItemList(),
+              Container(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: getTaskTypeList().length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        _selectedIndex = index;
+                        setState(() {});
+                      },
+                      child: TaskTypeItemList(
+                        index: index,
+                        itemIndex: _selectedIndex,
+                      ),
+                    );
+                  },
+                ),
+              ),
               SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -167,43 +186,43 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 }
 
 class TaskTypeItemList extends StatelessWidget {
+  final int itemIndex;
+  final int index;
   const TaskTypeItemList({
     Key? key,
+    required this.index,
+    required this.itemIndex,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: getTaskTypeList().length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            margin: EdgeInsets.symmetric(horizontal: 12),
-            width: 150,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 10,
-                  color: Colors.black.withOpacity(0.2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Image.asset(
-                  getTaskTypeList()[index].image,
-                ),
-                Text(getTaskTypeList()[index].title),
-              ],
-            ),
-          );
-        },
+      margin: EdgeInsets.symmetric(horizontal: 12),
+      width: 150,
+      decoration: BoxDecoration(
+        border: itemIndex == index
+            ? Border.all(
+                width: 2,
+                color: Colors.green,
+              )
+            : null,
+        borderRadius: BorderRadius.circular(18),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            color: Colors.black.withOpacity(0.2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Image.asset(
+            getTaskTypeList()[index].image,
+          ),
+          Text(getTaskTypeList()[index].title),
+        ],
       ),
     );
   }
 }
-
-extension on CustomHourPicker {}
