@@ -176,12 +176,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   void addTask() {
-    taskBox.add(
-      Task(
-          title: titleController.text,
-          subTitle: subTitleController.text,
-          time: _time!),
-    );
+    // Todo uncomment this
+    // taskBox.add(
+    //   Task(
+    //       title: titleController.text,
+    //       subTitle: subTitleController.text,
+    //       time: _time!),
+    // );
   }
 }
 
