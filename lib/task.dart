@@ -2,6 +2,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:note_application_expert_flutter/task_type.dart';
 part 'task.g.dart';
 
+
 @HiveType(typeId: 5)
 class Task extends HiveObject {
   @HiveField(0)
